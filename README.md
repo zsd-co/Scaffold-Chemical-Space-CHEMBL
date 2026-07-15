@@ -17,30 +17,26 @@ Usage Instructions
 
 3. To use your downloaded ChEMBL SQLite database directly, open `export_approved_drugs.py` and modify the `chembl_db_path` variable.
 
-    # Example: chembl_db_path = r"C:\Users\YourName\Downloads\chembl_36.db"
-
 4. To use your own data folder, open `chemical_space_analysis.py` and modify the `base_dir` variable in section `2. Path settings`.
-    # Example:
-    # base_dir = Path(
-    #     r"D:\your_project\output_dir"
-    # )
+
 5. Run the full pipeline via command line:
 
 bash
+# Obtain the compound dataset of scaffold hits
 ```
 python chembl.py --out output_dir
 ```
-# Obtain the compound dataset of scaffold hits
 
+# Obtain the approved drug dataset
 ```
 python export_approved_drugs.py
 ```
-# Obtain the approved drug dataset
 
+# Complete the chemical space analysis
 ```
 python chemical_space_analysis.py
 ```
-# Complete the chemical space analysis
+
 
 
 
