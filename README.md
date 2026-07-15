@@ -1,31 +1,51 @@
-# Scaffold-Chemical-Space-CHEMBL
+# Operation Manual
+
 Function:
 Query ChEMBL database, perform data cleaning, molecular aggregation, PAINS filtering, scaffold generation & parallel matching, scaffold scoring and result export.
 
 - Python 3.8+
 
-
-Key Dependencies
-- `chembl_downloader`：Execute SQL queries against the ChEMBL database
-- `rdkit`：Cheminformatics processing toolkit
-- `pandas`, `numpy`, `tqdm`
-
 Main File
-- `chembl.py`：script
+- `Skeleton_Hit_Performance_Score.py`：script
+- `chemical_space_analysis.py`：script
+- `export_approved_drugs.py`：script
 
 Usage Instructions
 1. Edit the `SQL_QUERY` at the top of the script for custom filtering, or use the default query directly.
-2. Run the full pipeline via command line:
+
+2. To update target scaffolds, open `Skeleton_Hit_Performance_Score.py` and append SMILES strings to the `skeleton_smiles_list` array.
+
+3. To use your downloaded ChEMBL SQLite database directly, open `export_approved_drugs.py` and modify the `chembl_db_path` variable.
+
+    # Example: chembl_db_path = r"C:\Users\YourName\Downloads\chembl_36.db"
+
+4. To use your own data folder, open `chemical_space_analysis.py` and modify the `base_dir` variable in section `2. Path settings`.
+    # Example:
+    # base_dir = Path(
+    #     r"D:\your_project\output_dir"
+    # )
+5. Run the full pipeline via command line:
 
 bash
 ```
 python chembl.py --out output_dir
 ```
+# Obtain the compound dataset of scaffold hits
+
+```
+python export_approved_drugs.py
+```
+# Obtain the approved drug dataset
+
+```
+python chemical_space_analysis.py
+```
+# Complete the chemical space analysis
+
+
 
 Configuration Guidelines
 - To adjust the scaffold matching similarity threshold, modify the `min_sim` argument in the `batch_search_skeletons_parallel` function call.
 - Tune the `max_workers` parameter to optimize parallel computing performance.
-- To update target scaffolds, append SMILES strings to the `skeleton_smiles_list` array.
 
 - `chembl_downloader` requires accessible connection to the ChEMBL database. If direct database access is unavailable, export query results to a local CSV file first, then modify the script to load the local file and skip the database query step.
-- database: chembl_36.db
